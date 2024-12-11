@@ -54,7 +54,7 @@ func (s *Server) Start() error {
 
 	// Create HTTP server.
 	s.server = &http.Server{
-		Addr:         "localhost:8080",
+		Addr:         "0.0.0.0:8080",
 		WriteTimeout: 10 * time.Second,
 		ReadTimeout:  10 * time.Second,
 		IdleTimeout:  10 * time.Second,

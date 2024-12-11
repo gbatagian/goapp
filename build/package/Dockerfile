@@ -20,4 +20,4 @@ RUN \
 
 COPY --from=build /go/src/goapp/bin /goapp
 
-ENTRYPOINT ["/goapp/goapp"]
+ENTRYPOINT ["/goapp/server"]
