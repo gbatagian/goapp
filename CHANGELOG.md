@@ -14,3 +14,7 @@ Initial version.
 
 - Update `ENTRYPOINT` to `/goapp/server` to automatically start the server when the container runs
 - Modify server binding to `0.0.0.0` to ensure the service is accessible from localhost while running in a container
+
+## Fixed
+
+- Session stats sent counter
