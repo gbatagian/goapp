@@ -10,6 +10,8 @@ Initial version.
 - Rule for container run: `make run`
 - Rule for clean image build: `make clean-image`
 - `/bin` on `.gitignore`
+- `value` on web socket response message
+- Test cases and benchmark for `RandString` function
 
 ## Changed
 

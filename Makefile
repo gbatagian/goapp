@@ -17,6 +17,14 @@ clean:
 run: 
 	go run cmd/server/main.go
 
+.PHONY: test
+test: 
+	go test ./...
+
+.PHONY: benchmark
+benchmark: 
+	go test -bench=. -benchmem ./...
+
 .PHONY: image
 image: goapp
 	docker build -t goapp -f build/package/Dockerfile .
