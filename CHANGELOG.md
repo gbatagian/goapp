@@ -9,6 +9,7 @@ Initial version.
 - Rule for image creation: `make image`
 - Rule for container run: `make run`
 - Rule for clean image build: `make clean-image`
+- `/bin` on `.gitignore`
 
 ## Changed
 
