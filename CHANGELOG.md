@@ -21,3 +21,9 @@ Initial version.
 ## Fixed
 
 - Session stats sent counter
+
+# [Unreleased] 2024/12/13
+
+## Added
+
+- Command line client

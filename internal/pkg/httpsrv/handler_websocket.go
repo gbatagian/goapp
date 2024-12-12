@@ -49,6 +49,7 @@ func (s *Server) handlerWebSocket(w http.ResponseWriter, r *http.Request) {
 	doneCh := make(chan struct{})
 	defer close(doneCh)
 
+	// Read messages from client
 	go func() {
 		defer close(readDoneCh)
 		for {
@@ -75,6 +76,7 @@ func (s *Server) handlerWebSocket(w http.ResponseWriter, r *http.Request) {
 		}
 	}()
 
+	// Write messages to client
 	for {
 		select {
 		case cv := <-watch.Recv():
