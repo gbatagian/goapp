@@ -22,6 +22,7 @@ type Server struct {
 	sessionStats []sessionStats              // Session stats.
 	quitChannel  chan struct{}               // Quit channel.
 	running      sync.WaitGroup              // Running goroutines.
+	activeWsSem  chan bool                   // Limits maximum number active websockets
 }
 
 func New(strChan <-chan string) *Server {
@@ -33,6 +34,7 @@ func New(strChan <-chan string) *Server {
 	s.sessionStats = []sessionStats{}
 	s.quitChannel = make(chan struct{})
 	s.running = sync.WaitGroup{}
+	s.activeWsSem = make(chan bool, 150)
 	return &s
 }
 

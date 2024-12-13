@@ -13,6 +13,9 @@ import (
 
 func (s *Server) handlerWebSocket(w http.ResponseWriter, r *http.Request) {
 	// Create and start a watcher.
+	s.activeWsSem <- true              // Block once channel capacity is reached
+	defer func() { <-s.activeWsSem }() // Release a slot once a web socket is closed
+
 	var watch = watcher.New()
 	if err := watch.Start(); err != nil {
 		s.error(w, http.StatusInternalServerError, fmt.Errorf("failed to start watcher: %w", err))

@@ -27,3 +27,4 @@ Initial version.
 ## Added
 
 - Command line client
+- Semaphores to manage the maximum number of active WebSockets
