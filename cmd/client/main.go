@@ -17,10 +17,12 @@ func main() {
 	done := make(chan struct{})
 
 	for i := 0; i < n; i++ {
-		go func() {
-			ws := client.NewWSClient("goapp/ws")
-			ws.Connect()
-		}()
+		go func(id int) {
+			ws := client.NewWSClient("goapp/ws", id)
+			if err := ws.Connect(); err != nil {
+				return
+			}
+		}(i)
 	}
 
 	<-done

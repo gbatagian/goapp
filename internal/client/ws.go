@@ -11,23 +11,27 @@ import (
 )
 
 type WSClient struct {
-	URL url.URL
+	URL      url.URL
+	clientID int
 }
 
-func NewWSClient(path string) *WSClient {
-	ws := WSClient{URL: url.URL{
-		Scheme: "ws",
-		Host:   "0.0.0.0:8080",
-		Path:   path,
-	},
+func NewWSClient(path string, id int) *WSClient {
+	ws := WSClient{
+		URL: url.URL{
+			Scheme: "ws",
+			Host:   "0.0.0.0:8080",
+			Path:   path,
+		},
+		clientID: id,
 	}
 	return &ws
 }
 
-func (ws *WSClient) Connect() {
+func (ws *WSClient) Connect() error {
 	conn, _, err := websocket.DefaultDialer.Dial(ws.URL.String(), nil)
 	if err != nil {
 		log.Printf("Error connection to websocket: %v\n", err)
+		return err
 	}
 	defer conn.Close()
 
@@ -35,6 +39,11 @@ func (ws *WSClient) Connect() {
 		message := watcher.Counter{}
 		conn.ReadJSON(&message)
 
-		fmt.Println(message)
+		fmt.Printf(
+			"[conn #%d] iteration: %d, value: %s\n",
+			ws.clientID,
+			message.Iteration,
+			message.Value,
+		)
 	}
 }

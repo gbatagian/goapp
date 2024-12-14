@@ -28,3 +28,10 @@ Initial version.
 
 - Command line client
 - Semaphores to manage the maximum number of active WebSockets
+
+# [Unreleased] 2024/12/14
+
+## Added
+
+- Gracefully handle errors on cli client
+- Fine tune cli client log message
