@@ -103,7 +103,8 @@ func (s *Server) GetAllowedIPs() []string {
 	// IPs addresses allowed to send request
 	return []string{
 		"127.0.0.1",
-		"[::1]", // Internal script request
+		"172.17.0.1", // docker default bridge gateway
+		"[::1]",      // Internal script request
 	}
 }
 

@@ -4,15 +4,22 @@ A sample Go WebSocket application
 
 # Run
 
-## Local
+## Server 
 
-1. Run the application: `make run`
+### Local
 
-Or build and run the application from the binary
+* Direct run: `make run` (or `go run cmd/server/main.go`)
+* Or build and run the binary:
+  - Build binaries: `make`
+  - Start the server: `./bin/server`
 
-1. Build the application: `make`
-2. Start the server: `./bin/server`
+### Docker
 
-## Docker
+* Run the container: `make run-container`
 
-1. Run the container: `make run-container`
+## CLI Client
+
+1. Direct run: `go run cmd/client/main.go -n 10`
+2. Or build and run the binary:
+   - Build binaries: `make`    
+   - Run the client: `./bin/client -n 10`

@@ -16,7 +16,7 @@ func TestRandStringOK(t *testing.T) {
 			fmt.Sprintf("Test case %d", i),
 			func(t *testing.T) {
 				// act
-				str := RandString(strLen)
+				str := RandHexString(strLen)
 
 				// assert
 				if len(str) != strLen {
@@ -33,6 +33,6 @@ func TestRandStringOK(t *testing.T) {
 func BenchmarkRandString(b *testing.B) {
 	n := 10
 	for i := 0; i <= b.N; i++ {
-		_ = RandString(n)
+		_ = RandHexString(n)
 	}
 }

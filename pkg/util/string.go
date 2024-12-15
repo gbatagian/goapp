@@ -6,8 +6,8 @@ import (
 
 var randx = rand.NewSource(42)
 
-// RandString returns a random string of length n.
-func RandString(n int) string {
+// RandHexString returns a random hexadecimal string of length n.
+func RandHexString(n int) string {
 	const letterBytes = "ABCDEF0123456789"
 	const (
 		letterIdxBits = 4                    // 4 bits to represent a letter index
