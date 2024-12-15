@@ -19,7 +19,7 @@ func NewWSClient(path string, id int) *WSClient {
 	ws := WSClient{
 		URL: url.URL{
 			Scheme: "ws",
-			Host:   "0.0.0.0:8080",
+			Host:   "localhost:8080",
 			Path:   path,
 		},
 		clientID: id,
@@ -29,6 +29,7 @@ func NewWSClient(path string, id int) *WSClient {
 
 func (ws *WSClient) Connect() error {
 	conn, _, err := websocket.DefaultDialer.Dial(ws.URL.String(), nil)
+
 	if err != nil {
 		log.Printf("Error connection to websocket: %v\n", err)
 		return err

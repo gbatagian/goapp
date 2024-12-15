@@ -35,3 +35,7 @@ Initial version.
 
 - Gracefully handle errors on cli client
 - Fine tune cli client log message
+
+# [Unreleased] 2024/12/15
+
+- Add allowed origins check on web socket connections

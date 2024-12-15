@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 	"sync"
 	"time"
 
@@ -88,6 +89,46 @@ func (s *Server) Stop() {
 
 	close(s.quitChannel)
 	s.running.Wait()
+}
+
+func (s *Server) GetAllowedOrigins() []string {
+	// Origins (scheme, host, port) allowed to send requests
+	return []string{
+		"http://127.0.0.1:8080",
+		"http://localhost:8080",
+	}
+}
+
+func (s *Server) GetAllowedIPs() []string {
+	// IPs addresses allowed to send request
+	return []string{
+		"127.0.0.1",
+		"[::1]", // Internal script request
+	}
+}
+
+func (s *Server) checkOrigin(r *http.Request) bool {
+	// Check Origin header
+	origin := r.Header.Get("Origin")
+	if origin != "" {
+		for _, allowedOrigin := range s.GetAllowedOrigins() {
+			if origin == allowedOrigin {
+				return true
+			}
+		}
+		return false
+	}
+
+	// If no Origin header is present, the request likely comes from a tool
+	// like Postman or a script, rather than a browser. In this case verify
+	// the request by checking the remote IP address of the client.
+	for _, allowedIP := range s.GetAllowedIPs() {
+		if strings.Contains(r.RemoteAddr, allowedIP) {
+			return true
+		}
+	}
+
+	return false
 }
 
 func (s *Server) mainLoop() {
